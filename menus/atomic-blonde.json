@@ -1,0 +1,26 @@
+{
+  "context-menu": {
+    "atom-text-editor": [
+      {
+        "label": "Enable atomic-blonde",
+        "command": "atomic-blonde:enable"
+      }
+    ]
+  },
+  "menu": [
+    {
+      "label": "Packages",
+      "submenu": [
+        {
+          "label": "atomic-blonde",
+          "submenu": [
+            {
+              "label": "Enable",
+              "command": "atomic-blonde:enable"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
