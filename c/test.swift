@@ -1,3 +1,6 @@
+// NOTICE: this file is test data (not source code) and *NOT* MIT-licensed! it 
+// originates from https://github.com/kelvin13/noise which is GPL3 licensed!
+
 public
 struct DiskSampler2D
 {
