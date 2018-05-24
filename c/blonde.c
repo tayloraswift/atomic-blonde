@@ -1,5 +1,5 @@
 #include "sourcekitd.h"
-#include <stdio.h>
+#include <nan.h>
 
 #define null 0
 
