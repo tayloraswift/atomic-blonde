@@ -1,12 +1,15 @@
 {
     "name": "atomic-blonde",
-    "main": "./lib/atomic-blonde",
+    "main": "./lib/atomic-blonde.js",
     "version": "0.0.0",
     "description": "A short description of your package",
-    "keywords": [
+    "keywords": [],
+    "activationCommands": {
+        "atom-workspace": "atomic-blonde:enable"
+    },
+    "activationHooks": [
+        "language-swift:grammar-used"
     ],
-    "activationCommands": {"atom-workspace": "atomic-blonde:enable"},
-    "activationHooks": ["language-swift:grammar-used"],
     "repository": "https://github.com/atom/atomic-blonde",
     "license": "MIT",
     "engines": {
@@ -15,7 +18,7 @@
     "scripts": {
         "build": "node-gyp build",
         "install": "node-gyp rebuild",
-        "start": "node ./index.js"
+        "start": "node ./test.js"
     },
     "dependencies": {
         "nan": "^2.7.0"
