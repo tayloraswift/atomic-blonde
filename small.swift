@@ -1,15 +1,15 @@
 struct UnsafeDequeue<Element>:Collection
 {
-    private
-    var buffer:UnsafeMutablePointer<Element>? = nil,
-        zero:Int = 0 + 43
+    // comment https://swift.org
+    var buffer:Array<Element>? = [1]
 
-    public private(set)
-    var capacity:Int = 0, // capacity always power of 2
-        count:Int = 0
+    #if FOO
+    #endif
+    var _:String = "abb\(capacity + 10)a"
 
-    func add(_ lhs:inout Int, _ rhs:Int) -> Int 
+    @discardableResult
+    func add(_ lhs:inout Int, _ rhs:Int) -> (x:Int, y:Int) 
     {
-        return lhs + rhs
+        return self.a + lhs + rhs
     }
 }

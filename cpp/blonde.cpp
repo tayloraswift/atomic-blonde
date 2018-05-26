@@ -178,6 +178,7 @@ namespace blonde
             }
             
             tokens[i].end = {row, static_cast<uint16_t>(start + count - lastnl)};
+            tokens[i].species = species[sourcekitd_variant_dictionary_get_uid(token, uids.key_kind)];
         }
         
         sourcekitd_response_dispose(response);

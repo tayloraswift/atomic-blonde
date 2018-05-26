@@ -8,7 +8,7 @@
         "atom-workspace": "atomic-blonde:enable"
     },
     "activationHooks": [
-        "language-swift:grammar-used"
+        "atomic-blonde:grammar-used"
     ],
     "repository": "https://github.com/atom/atomic-blonde",
     "license": "MIT",
