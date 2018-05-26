@@ -1,12 +1,9 @@
 {
     "name": "atomic-blonde",
     "main": "./lib/atomic-blonde.js",
-    "version": "0.0.0",
-    "description": "A short description of your package",
+    "version": "0.1.0",
+    "description": "SourceKit-based syntax highlighting for the Swift language",
     "keywords": [],
-    "activationCommands": {
-        "atom-workspace": "atomic-blonde:enable"
-    },
     "activationHooks": [
         "atomic-blonde:grammar-used"
     ],
