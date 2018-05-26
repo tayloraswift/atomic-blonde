@@ -1,23 +1,23 @@
 {
-    "name": "atomic-blonde",
-    "main": "./lib/atomic-blonde.js",
-    "version": "0.1.0",
-    "description": "SourceKit-based syntax highlighting for the Swift language",
-    "keywords": [],
-    "activationHooks": [
-        "atomic-blonde:grammar-used"
-    ],
-    "repository": "https://github.com/kelvin13/atomic-blonde",
-    "license": "MIT",
-    "engines": {
-        "atom": ">=1.0.0 <2.0.0"
-    },
-    "scripts": {
-        "build": "node-gyp build",
-        "install": "node-gyp rebuild",
-        "start": "node ./test.js"
-    },
-    "dependencies": {
-        "nan": "^2.7.0"
-    }
+  "name": "atomic-blonde",
+  "main": "./lib/atomic-blonde.js",
+  "version": "0.2.0",
+  "description": "SourceKit-based syntax highlighting for the Swift language",
+  "keywords": [],
+  "activationHooks": [
+    "atomic-blonde:grammar-used"
+  ],
+  "repository": "https://github.com/kelvin13/atomic-blonde",
+  "license": "MIT",
+  "engines": {
+    "atom": ">=1.0.0 <2.0.0"
+  },
+  "scripts": {
+    "build": "node-gyp build",
+    "install": "node-gyp rebuild",
+    "start": "node ./test.js"
+  },
+  "dependencies": {
+    "nan": "^2.7.0"
+  }
 }
