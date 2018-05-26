@@ -7,7 +7,7 @@
     "activationHooks": [
         "atomic-blonde:grammar-used"
     ],
-    "repository": "https://github.com/atom/atomic-blonde",
+    "repository": "https://github.com/kelvin13/atomic-blonde",
     "license": "MIT",
     "engines": {
         "atom": ">=1.0.0 <2.0.0"
