@@ -22,9 +22,9 @@
             '-Wno-error=unused-variable'
         ], 
         'libraries': [
-            '-Wl,-rpath,/home/taylorswift/tools/swift/usr/lib,-rpath,/home/taylorswift/tools/swift/usr/lib/swift/linux', 
-            '-L/home/taylorswift/tools/swift/usr/lib', 
-            '-L/home/taylorswift/tools/swift/usr/lib/swift/linux', 
+            '-Wl,-rpath,/usr/lib,-rpath,/usr/lib/swift/linux', 
+            '-L/usr/lib', 
+            '-L/usr/lib/swift/linux', 
             '-lsourcekitdInProc'
         ]
     }]
