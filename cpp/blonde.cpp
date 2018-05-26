@@ -1,8 +1,9 @@
 #include "sourcekitd.h"
+#include <unordered_map>
 #include <nan.h>
 
-#define UID(symbol, string) uids. symbol        = sourcekitd_uid_get_from_cstr(string)
-#define SPECIES(symbol, string) species. symbol = sourcekitd_uid_get_from_cstr(string)
+#define UID(symbol, string) uids. symbol = sourcekitd_uid_get_from_cstr(string)
+#define SPECIES(key, id) species.insert({sourcekitd_uid_get_from_cstr(key), id})
 
 namespace blonde 
 {
@@ -14,6 +15,8 @@ namespace blonde
     typedef struct 
     {
         latticepoint_t start, end;
+        uint8_t species;
+        uint8_t _;
     } token_t;
     
     sourcekitd_object_t request;
@@ -38,12 +41,17 @@ namespace blonde
             key_length;
     } uids;
     
+    /*
     struct 
     {
         sourcekitd_uid_t source_diagnostic_severity_error,
             source_diagnostic_severity_warning, 
             source_diagnostic_severity_note;
-    } species;
+    } diagnostics;
+    */
+    
+    // we can probably speed this up 10x by implementing a custom single-layer hashmap 
+    std::unordered_map<sourcekitd_uid_t, uint8_t> species;
 
     void create_uids(void) 
     {
@@ -64,9 +72,34 @@ namespace blonde
         UID(key_offset,                 "key.offset");
         UID(key_length,                 "key.length");
         
-        SPECIES(source_diagnostic_severity_error,   "source.diagnostic.severity.error");
-        SPECIES(source_diagnostic_severity_warning, "source.diagnostic.severity.warning");
-        SPECIES(source_diagnostic_severity_note,    "source.diagnostic.severity.note");
+        //DIAGNOSTIC(source_diagnostic_severity_error,   "source.diagnostic.severity.error");
+        //DIAGNOSTIC(source_diagnostic_severity_warning, "source.diagnostic.severity.warning");
+        //DIAGNOSTIC(source_diagnostic_severity_note,    "source.diagnostic.severity.note");
+        
+        species.clear();
+        SPECIES("source.lang.swift.syntaxtype.keyword",                     0);
+        SPECIES("source.lang.swift.syntaxtype.identifier",                  1);
+        SPECIES("source.lang.swift.syntaxtype.typeidentifier",              2);
+        
+        SPECIES("source.lang.swift.syntaxtype.buildconfig.keyword",         3);
+        SPECIES("source.lang.swift.syntaxtype.buildconfig.id",              4);
+        SPECIES("source.lang.swift.syntaxtype.pounddirective.keyword",      5);
+        
+        SPECIES("source.lang.swift.syntaxtype.attribute.id",                6);
+        SPECIES("source.lang.swift.syntaxtype.attribute.builtin",           7);
+        
+        SPECIES("source.lang.swift.syntaxtype.number",                      8);
+        SPECIES("source.lang.swift.syntaxtype.string",                      9);
+        SPECIES("source.lang.swift.syntaxtype.string_interpolation_anchor", 10);
+        
+        SPECIES("source.lang.swift.syntaxtype.comment",                     11);
+        SPECIES("source.lang.swift.syntaxtype.doccomment",                  12);
+        SPECIES("source.lang.swift.syntaxtype.doccomment.field",            13);
+        SPECIES("source.lang.swift.syntaxtype.comment.mark",                14);
+        SPECIES("source.lang.swift.syntaxtype.comment.url",                 15);
+        
+        SPECIES("source.lang.swift.syntaxtype.placeholder",                 16);
+        SPECIES("source.lang.swift.syntaxtype.objectliteral",               17);
     }
     
     void initialize(v8::FunctionCallbackInfo<v8::Value> const&)
