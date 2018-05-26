@@ -125,8 +125,9 @@ namespace blonde
                 v8::String::NewFromUtf8(isolate, "invalid arguments")));
         }
         
-        char const* const source = (char const*) *Nan::Utf8String(frame[0]);
-        //char const* const source = "struct struct struct struct struct struct struct struct struct struct struct struct struct struct struct struct struct struct struct struct struct struct struct struct struct struct struct struct struct struct struct struct struct struct struct struct struct struct struct struct struct struct struct struct struct struct struct struct 7890123                ";
+        // reason 85 why C++ is terrible:
+        Nan::Utf8String retain(frame[0]);
+        char const* const source = (char const*) *retain;
         
         sourcekitd_request_dictionary_set_string(request, uids.key_name, "atomic blonde");
         sourcekitd_request_dictionary_set_string(request, uids.key_sourcetext, source);
@@ -141,8 +142,6 @@ namespace blonde
         
         sourcekitd_variant_t  const dict     = sourcekitd_response_get_value(response);
         sourcekitd_variant_t  const syntax   = sourcekitd_variant_dictionary_get_value(dict, uids.key_syntaxmap);
-        //sourcekitd_variant_t  const errors   = sourcekitd_variant_dictionary_get_value(dict, uids.key_diagnostics);
-        
         
         size_t const count    = sourcekitd_variant_array_get_count(syntax);
         
@@ -177,7 +176,7 @@ namespace blonde
                 }
             }
             
-            tokens[i].end = {row, static_cast<uint16_t>(start + count - lastnl)};
+            tokens[i].end     = {row, static_cast<uint16_t>(start + count - lastnl)};
             tokens[i].species = species[sourcekitd_variant_dictionary_get_uid(token, uids.key_kind)];
         }
         
@@ -192,13 +191,6 @@ namespace blonde
         sourcekitd_request_release(request);
         sourcekitd_shutdown();
     }
-    
-    void testfunc(v8::FunctionCallbackInfo<v8::Value> const& frame)
-    {
-        v8::Isolate* isolate = v8::Isolate::GetCurrent();
-        
-        isolate -> ThrowException(v8::Exception::Error(v8::String::NewFromUtf8(isolate, "invalid response")));
-    }
 }
 
 void Init(v8::Handle<v8::Object> exports)
@@ -206,8 +198,6 @@ void Init(v8::Handle<v8::Object> exports)
     NODE_SET_METHOD(exports, "initialize", blonde::initialize);
     NODE_SET_METHOD(exports, "highlight", blonde::highlight);
     NODE_SET_METHOD(exports, "deinitialize", blonde::deinitialize);
-    
-    NODE_SET_METHOD(exports, "testfunc", blonde::testfunc);
 }
 
 NODE_MODULE(blonde, Init)
