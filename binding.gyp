@@ -1,12 +1,12 @@
 {
     'targets': [{
-        'target_name': 'blonde', 
+        'target_name': 'blonde',
         'include_dirs': [
             '<!(node -e \"require(\'nan\')\")'
         ],
         'sources': [
             'cpp/blonde.cpp'
-        ], 
+        ],
         'compiler_checks': [
             '-Wall',
             '-Wextra',
@@ -20,12 +20,7 @@
             '-Wunreachable-code',
             '-Wold-style-cast',
             '-Wno-error=unused-variable'
-        ], 
-        'libraries': [
-            '-Wl,-rpath,/usr/lib,-rpath,/usr/lib/swift/linux', 
-            '-L/usr/lib', 
-            '-L/usr/lib/swift/linux', 
-            '-lsourcekitdInProc'
-        ]
+        ],
+        'libraries': []
     }]
 }
