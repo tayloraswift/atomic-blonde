@@ -1,7 +1,7 @@
 {
   "name": "atomic-blonde",
   "main": "./lib/atomic-blonde.js",
-  "version": "0.3.0",
+  "version": "1.0.2",
   "description": "SourceKit-based syntax highlighting for the Swift language",
   "keywords": [],
   "activationHooks": [
