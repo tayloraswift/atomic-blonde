@@ -83,9 +83,6 @@ namespace sourcekit
         int const status = pclose(swiftenv);
         if (status != 0) 
         {
-            // FILE* descriptor = fopen("/home/klossy/log.txt", "a");
-            // fprintf(descriptor, "%p\n", status);
-            // fclose(descriptor);
             return error::swiftenv_error;
         }
         
@@ -97,7 +94,16 @@ namespace sourcekit
             return error::swift_not_found;
         }
         
-        *library = dlopen("/home/klossy/.swiftenv/versions/DEVELOPMENT-SNAPSHOT-2019-07-01-a/usr/lib/libsourcekitdInProc.so", RTLD_NOW);
+        *library = dlopen(path, RTLD_NOW);
+        
+        // FILE* descriptor = fopen("/Users/kelvin/log.txt", "a");
+        // fprintf(descriptor, "%p, %d\n", library, library == nullptr);
+        // fclose(descriptor);
+        if (library == nullptr) 
+        {
+            return error::sourcekit_not_found;
+        }
+        
         return error::none;
         
         #undef SWIFT_PATH_LENGTH_MAX
