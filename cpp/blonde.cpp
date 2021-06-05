@@ -292,7 +292,7 @@ namespace blonde
         if (frame.Length() != 1 || !frame[0] -> IsString())
         {
             isolate -> ThrowException(v8::Exception::TypeError(
-                v8::String::NewFromUtf8(isolate, "invalid arguments")));
+                v8::String::NewFromUtf8(isolate, "invalid arguments").ToLocalChecked()));
         }
         
         // reason 85 why C++ is terrible:
@@ -307,7 +307,7 @@ namespace blonde
         if (sourcekit::response_is_error(response))
         {
             isolate -> ThrowException(v8::Exception::Error(
-                v8::String::NewFromUtf8(isolate, "invalid response")));
+                v8::String::NewFromUtf8(isolate, "invalid response").ToLocalChecked()));
         }
         
         sourcekitd_variant_t  const dict     = sourcekit::response_get_value(response);
@@ -363,7 +363,7 @@ namespace blonde
     }
 }
 
-void Init(v8::Handle<v8::Object> exports)
+void Init(v8::Local<v8::Object> exports)
 {
     NODE_SET_METHOD(exports, "initialize", blonde::initialize);
     NODE_SET_METHOD(exports, "highlight", blonde::highlight);
