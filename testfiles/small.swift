@@ -8,7 +8,15 @@ struct Queue<Element>:Collection
     let b:Int = 0
     #endif
     
+    #error("foo\n\u{A0}")
+    
     var _:String = "abb\(buffer[0] + 10)a"
+    
+    @Code 
+    var foo:String 
+    {
+        "foo"
+    }
 
     @discardableResult
     static 
