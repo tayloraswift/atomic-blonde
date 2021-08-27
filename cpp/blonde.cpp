@@ -28,6 +28,7 @@ namespace sourcekit
     };
     
     sourcekitd_uid_t        (*uid_get_from_cstr)            (const char *string);
+    const char *            (*uid_get_string_ptr)           (sourcekitd_uid_t object);
     
     void                    (*initialize)                   (void);
     void                    (*shutdown)                     (void);
@@ -122,6 +123,7 @@ namespace sourcekit
         }
         
         SYMBOL(library, uid_get_from_cstr,              sourcekitd_uid_t        (*)(const char*))
+        SYMBOL(library, uid_get_string_ptr,             const char *            (*)(sourcekitd_uid_t object))
         
         SYMBOL(library, initialize,                     void                    (*)(void))
         SYMBOL(library, shutdown,                       void                    (*)(void))
@@ -347,7 +349,20 @@ namespace blonde
             }
             
             tokens[i].end     = {row, static_cast<uint16_t>(start + count - lastnl)};
-            tokens[i].species = species[sourcekit::variant_dictionary_get_uid(token, uids.key_kind)];
+            tokens[i].species = species.at(sourcekit::variant_dictionary_get_uid(token, uids.key_kind));
+            
+            // HACK: manual `async``await` handling 
+            if (count == 5 && tokens[i].species == 1) 
+            {
+                if      (strncmp("async", source + start, 5) == 0)
+                {
+                    tokens[i].species = 0;
+                }
+                else if (strncmp("await", source + start, 5) == 0)
+                {
+                    tokens[i].species = 0;
+                }
+            }
         }
         
         sourcekit::response_dispose(response);

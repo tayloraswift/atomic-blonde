@@ -20,9 +20,9 @@ struct Queue<Element>:Collection
 
     @discardableResult
     static 
-    func + (_ lhs:inout Int, _ rhs:Int) -> (x:Int, y:Int) 
+    func + (_ lhs:inout Int, _ rhs:Int) async -> (x:Int, y:Int) 
     {
-        return lhs + rhs
+        return lhs + rhs 
     }
     
     subscript(i:Int) -> [Element]
