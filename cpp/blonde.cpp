@@ -95,7 +95,7 @@ namespace sourcekit
             return error::swift_not_found;
         }
         
-        *library = dlopen(path, RTLD_NOW);
+        *library = dlopen(path, RTLD_LAZY);
         
         // FILE* descriptor = fopen("/Users/kelvin/log.txt", "a");
         // fprintf(descriptor, "%p, %d\n", library, library == nullptr);
